@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -17,10 +18,11 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -54,5 +56,29 @@ public class TodoControllerTest {
                 .andExpect(jsonPath("$[0].status", is(todo.getStatus().toString())));
 
         then(todoService).should().getTodos();
+    }
+
+    @Test
+    public void whenAddTodo_thenReturnTodoJson() throws Exception {
+        Todo addedTodo = new Todo(
+                "milk",
+                "remember the milk - changed",
+                Date.from(Instant.parse("2018-12-31T00:00:00.000Z")),
+                Todo.Status.Pending
+        );
+        addedTodo.setId(UUID.randomUUID());
+
+        given(todoService.addTodo(any(Todo.class))).willReturn(addedTodo);
+
+
+        mvc.perform(post("/api/todos")
+                .content("{\"name\": \"milk\",\"description\":\"remember the milk\", \"dueDate\":\"2018-12-31T00:00:00.000Z\", \"status\":\"Pendng\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(addedTodo.getName())))
+                .andExpect(jsonPath("$.description", is(addedTodo.getDescription())))
+                .andExpect(jsonPath("$.status", is(addedTodo.getStatus().toString())));
+
+        then(todoService).should().addTodo(any(Todo.class));
     }
 }

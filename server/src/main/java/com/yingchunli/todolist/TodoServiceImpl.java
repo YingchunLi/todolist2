@@ -17,4 +17,10 @@ public class TodoServiceImpl implements TodoService {
         return StreamSupport.stream(todoRepository.findAll().spliterator(), true)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Todo addTodo(Todo todo) {
+        // assume that name can be duplicated
+        return todoRepository.save(todo);
+    }
 }
