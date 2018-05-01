@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test - with todos 1`] = `
+<div>
+  <h2>
+    Todo List
+  </h2>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Pending todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Done todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;
+
+exports[`snapshot test - without none-json resonse 1`] = `
+<div>
+  <h2>
+    Todo List
+  </h2>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Pending todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Done todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;
+
+exports[`snapshot test - without none-ok response 1`] = `
+<div>
+  <h2>
+    Todo List
+  </h2>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Pending todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Done todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;
+
+exports[`snapshot test - without todos 1`] = `
+<div>
+  <h2>
+    Todo List
+  </h2>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Pending todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+  <table
+    className="table table-striped table-hover"
+  >
+    <caption>
+      Done todos
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          due date
+        </th>
+        <th>
+          status
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;

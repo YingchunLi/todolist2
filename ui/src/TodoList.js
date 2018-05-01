@@ -37,8 +37,14 @@ export class TodoList extends Component {
   };
 
   componentWillMount() {
-    fetch('/api/todos').then(response => response.json())
-      .then(json => this.setState({todos: json}));
+    fetch('/api/todos')
+      .then(response => {
+        if (!response.ok) throw Error(`${response.status} (${response.statusText})`);
+        return response;
+      })
+      .then(response => response.json())
+      .then(json => this.setState({todos: json}))
+      .catch(error => console.error(`failed to get todo list: ${error}`));
   }
 
   render() {
