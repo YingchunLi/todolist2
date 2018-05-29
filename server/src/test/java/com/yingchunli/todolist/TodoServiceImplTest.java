@@ -52,7 +52,7 @@ public class TodoServiceImplTest {
 
         then(todoRepository).should().findAll();
 
-        assertThat(todoList.size()).isEqualTo(1);
+        assertThat(todoList).hasSize(1);
         assertThat(todoList.get(0).getName()).isEqualTo("milk");
         assertThat(todoList.get(0).getDescription()).isEqualTo("remember the milk");
         assertThat(todoList.get(0).getDueDate()).isEqualTo(Date.from(Instant.parse("2018-12-31T00:00:00.000Z")));

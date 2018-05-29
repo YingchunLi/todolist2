@@ -1,6 +1,7 @@
 package com.yingchunli.todolist;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,13 +16,16 @@ public class Todo {
     @GeneratedValue
     private UUID id;
 
+    @NotNull
     private String name;
     @Lob
     private String description;
+    @NotNull
     private Date dueDate;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 7)
+    @NotNull
     private Status status;
 
     public Todo() {

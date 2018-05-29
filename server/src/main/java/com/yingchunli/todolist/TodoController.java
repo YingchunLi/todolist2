@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,7 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public Todo save(Todo todo) {
+    public Todo save(@Valid Todo todo) {
         return todoService.addTodo(todo);
     }
-
 }
