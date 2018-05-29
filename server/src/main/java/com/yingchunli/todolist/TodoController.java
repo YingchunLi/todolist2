@@ -1,10 +1,7 @@
 package com.yingchunli.todolist;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,7 +19,7 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public Todo save(@Valid Todo todo) {
+    public Todo save(@Valid @RequestBody Todo todo) {
         return todoService.addTodo(todo);
     }
 }
