@@ -1,35 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-const TodoListTable = ({title, todos}) =>
-    <table className="table table-striped table-hover">
-      <caption>{title}</caption>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>description</th>
-          <th>due date</th>
-          <th>status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          todos.map((todo, idx) =>
-            <tr key={idx} >
-              <td>{todo.name}</td>
-              <td>
-                {todo.description &&
-                todo.description.split('\n')
-                  .map((line,idx) => <div key={idx}>{line}</div>)
-                }
-                </td>
-              <td>{todo.dueDate && new Date(todo.dueDate).toISOString()}</td>
-              <td>{todo.status}</td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>;
+const TodoListGroup = ({title, todos}) =>
+  <article className="todolist">
+    <header>{title}</header>
+    <ul>
+      { todos.map((todo, idx) => <li key={idx}>{todo.name}</li>) }
+    </ul>
+    <footer>list footer</footer>
+  </article>;
 
 export class TodoList extends Component {
   state = {
@@ -52,10 +31,9 @@ export class TodoList extends Component {
     const pendingTodos = todos.filter(t => t.status === 'Pending');
     const doneTodos = todos.filter(t => t.status === 'Done');
     return (
-      <div>
-        <h2>Todo List</h2>
-        <TodoListTable title="Pending todos" todos={pendingTodos} />
-        <TodoListTable title="Done todos" todos={doneTodos} />
+      <div className="todolists">
+        <TodoListGroup todos={pendingTodos} title="Pending todos" />
+        <TodoListGroup todos={doneTodos} title="Done todos" />
       </div>
     );
   }
