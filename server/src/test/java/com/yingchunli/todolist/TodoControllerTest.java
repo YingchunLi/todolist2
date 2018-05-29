@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -72,13 +73,35 @@ public class TodoControllerTest {
 
 
         mvc.perform(post("/api/todos")
-                .content("{\"name\": \"milk\",\"description\":\"remember the milk\", \"dueDate\":\"2018-12-31T00:00:00.000Z\", \"status\":\"Pendng\"}")
+                .content("{\"name\": \"milk\",\"description\":\"remember the milk\", \"dueDate\":\"2018-12-31T00:00:00.000Z\", \"status\":\"Pending\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(addedTodo.getName())))
                 .andExpect(jsonPath("$.description", is(addedTodo.getDescription())))
+                .andExpect(jsonPath("$.dueDate", containsString("2018-12-31")))
                 .andExpect(jsonPath("$.status", is(addedTodo.getStatus().toString())));
 
         then(todoService).should().addTodo(any(Todo.class));
+    }
+
+    @Test
+    public void whenAddInvalidTodo_thenReturnError() throws Exception {
+        Todo addedTodo = new Todo(
+                "milk",
+                "remember the milk - changed",
+                Date.from(Instant.parse("2018-12-31T00:00:00.000Z")),
+                Todo.Status.Pending
+        );
+        addedTodo.setId(UUID.randomUUID());
+
+        given(todoService.addTodo(any(Todo.class))).willReturn(addedTodo);
+
+
+        mvc.perform(post("/api/todos")
+                .content("{\"description\":\"remember the milk\", \"dueDate\":\"2018-12-31T00:00:00.000Z\", \"status\":\"Pendng\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+
+        then(todoService).shouldHaveZeroInteractions();
     }
 }
